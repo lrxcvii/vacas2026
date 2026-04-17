@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vacaciones Mayo 2026 — 2 Parejas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0E2A3A; --gold:#C8973A;
+  --cov-c:#f0c97a; --cov-bg:#1C1200;
+  --col-c:#f5a995; --col-bg:#200A08;
+  --cur-c:#90caf9; --cur-bg:#071525;
+  --mex-c:#81d17f; --mex-bg:#0A1F15;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--deep);color:#fff;overflow-x:hidden}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:2rem;background:var(--deep)}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,#1a4a5a 0%,var(--deep) 70%)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(200,151,58,.18) 1px,transparent 1px);background-size:40px 40px}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-badge{display:inline-block;font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,151,58,.4);padding:.4rem 1.2rem;border-radius:100px;margin-bottom:1.5rem;animation:fadeUp .8s ease both}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,7vw,5.5rem);line-height:1.05;margin-bottom:1rem;animation:fadeUp .8s ease .15s both}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.6);margin-bottom:2.5rem;animation:fadeUp .8s ease .3s both}
+.hero-stats{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s ease .45s both}
+.hero-stat .num{display:block;font-family:'Playfair Display',serif;font-size:2rem;color:var(--gold);font-weight:700}
+.hero-stat .lbl{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.3);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;animation:bounce 2s infinite;z-index:1}
+.scroll-hint::after{content:'';display:block;width:1px;height:40px;background:rgba(255,255,255,.2)}
+
+/* NAV */
+.dest-nav{background:rgba(14,42,58,.97);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
+.dest-nav ul{display:flex;list-style:none;justify-content:center;max-width:1100px;margin:0 auto;flex-wrap:wrap}
+.dest-nav a{display:flex;align-items:center;gap:.35rem;padding:.9rem 1.2rem;text-decoration:none;font-size:.72rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.35);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.dest-nav a.cov:hover,.dest-nav a.cov.active{border-color:var(--cov-c);color:var(--cov-c)}
+.dest-nav a.col:hover,.dest-nav a.col.active{border-color:var(--col-c);color:var(--col-c)}
+.dest-nav a.cur:hover,.dest-nav a.cur.active{border-color:var(--cur-c);color:var(--cur-c)}
+.dest-nav a.mex:hover,.dest-nav a.mex.active{border-color:var(--mex-c);color:var(--mex-c)}
+.dest-nav a.cmp:hover{color:var(--gold)}
+
+/* SECTIONS */
+section.dest-section{min-height:100vh;padding:5rem 1.5rem}
+.dest-inner{max-width:1000px;margin:0 auto}
+.dest-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;margin-bottom:2.5rem}
+@media(max-width:700px){.dest-header{grid-template-columns:1fr;gap:2rem}}
+.dest-tag{display:inline-block;font-size:.62rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:.28rem .85rem;border-radius:100px;margin-bottom:.8rem}
+.dest-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.3rem);line-height:1.1;margin-bottom:.4rem}
+.dest-subtitle{font-size:.8rem;color:rgba(255,255,255,.36);letter-spacing:.07em;margin-bottom:1rem}
+.dest-desc{font-size:.87rem;line-height:1.75;color:rgba(255,255,255,.6)}
+.quick-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:.62rem}
+.fact{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.72rem .88rem}
+.fact-label{font-size:.57rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.26);margin-bottom:.2rem}
+.fact-value{font-size:.84rem;font-weight:500}
+
+/* ALERTS */
+.alert{display:flex;align-items:flex-start;gap:.65rem;border-radius:10px;padding:.72rem .9rem;font-size:.75rem;margin-bottom:1.1rem;line-height:1.5}
+.alert.good{background:rgba(80,180,100,.07);border:1px solid rgba(80,180,100,.2);color:#80d090}
+.alert.warn{background:rgba(200,151,58,.08);border:1px solid rgba(200,151,58,.22);color:#e8c070}
+.alert.danger{background:rgba(239,83,60,.07);border:1px solid rgba(239,83,60,.2);color:#f5a995}
+
+/* FLIGHTS */
+.section-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.23);margin-bottom:.75rem}
+.flights-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:1rem;margin-bottom:1.1rem}
+.flight-row{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.05);gap:.8rem}
+.flight-row:last-child{border-bottom:none}
+.flight-origin{font-size:.77rem;color:rgba(255,255,255,.45);min-width:72px}
+.flight-arrow{color:rgba(255,255,255,.14);font-size:.73rem;flex:1;text-align:center}
+.flight-price{font-size:.88rem;font-weight:600}
+.flight-airline{font-size:.63rem;color:rgba(255,255,255,.3)}
+.flight-detail{font-size:.62rem;color:rgba(255,255,255,.26)}
+.flight-info{text-align:right}
+
+/* CARDS */
+.cards-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.82rem;margin-bottom:1.7rem}
+@media(max-width:700px){.cards-row{grid-template-columns:1fr}}
+.info-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:1.05rem}
+.card-icon{font-size:1.2rem;margin-bottom:.5rem}
+.card-title{font-size:.58rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.27);margin-bottom:.28rem}
+.card-main{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:.22rem}
+.card-detail{font-size:.7rem;color:rgba(255,255,255,.4);line-height:1.5}
+
+/* TOURS */
+.tours-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.72rem;margin-bottom:1.7rem}
+@media(max-width:620px){.tours-grid{grid-template-columns:1fr}}
+.tour-card{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:13px;padding:.9rem 1rem;cursor:pointer;transition:background .18s,border-color .18s,transform .13s;user-select:none;position:relative}
+.tour-card:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+.tour-card.cov-tour.selected{border-color:rgba(240,201,122,.35);background:rgba(240,201,122,.05)}
+.tour-card.col-tour.selected{border-color:rgba(245,169,149,.35);background:rgba(245,169,149,.05)}
+.tour-card.cur-tour.selected{border-color:rgba(144,202,249,.35);background:rgba(144,202,249,.05)}
+.tour-card.mex-tour.selected{border-color:rgba(129,209,127,.35);background:rgba(129,209,127,.05)}
+.tour-check{position:absolute;top:.78rem;right:.82rem;width:21px;height:21px;border-radius:50%;border:1.5px solid rgba(255,255,255,.17);display:flex;align-items:center;justify-content:center;font-size:.63rem;font-weight:700;transition:all .18s}
+.cov-tour.selected .tour-check{background:var(--cov-c);border-color:var(--cov-c);color:#1C1200}
+.col-tour.selected .tour-check{background:var(--col-c);border-color:var(--col-c);color:#3d1510}
+.cur-tour.selected .tour-check{background:var(--cur-c);border-color:var(--cur-c);color:#071525}
+.mex-tour.selected .tour-check{background:var(--mex-c);border-color:var(--mex-c);color:#0A1F15}
+.tour-header{display:flex;align-items:flex-start;gap:.42rem;margin-bottom:.28rem;padding-right:1.8rem}
+.tour-num{font-size:.58rem;font-weight:600;color:rgba(255,255,255,.26);min-width:15px;padding-top:3px}
+.tour-name{font-size:.82rem;font-weight:500;line-height:1.3}
+.star-pill{display:inline-block;font-size:.52rem;padding:.08rem .4rem;border-radius:100px;background:rgba(200,151,58,.16);color:var(--gold);margin-left:.22rem;vertical-align:middle}
+.tour-desc{font-size:.71rem;color:rgba(255,255,255,.38);line-height:1.44;margin-bottom:.52rem;padding-left:1.25rem}
+.tour-footer{display:flex;align-items:flex-end;justify-content:space-between;padding-left:1.25rem}
+.tour-price{font-size:.8rem;font-weight:700}
+.tour-price-sub{font-size:.61rem;color:rgba(255,255,255,.3);margin-top:.04rem}
+.tour-cta{font-size:.61rem;transition:color .15s}
+.tour-cta.off{color:rgba(255,255,255,.26)}
+.tour-cta.on{color:rgba(255,255,255,.52)}
+
+/* TOTAL */
+.total-block{border-radius:15px;padding:1.5rem 1.7rem;margin-top:.4rem}
+.total-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.33);margin-bottom:.45rem}
+.total-row{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1.4rem}
+.total-price-big{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;line-height:1;transition:all .25s}
+.total-price-sub{font-size:.71rem;color:rgba(255,255,255,.36);margin-top:.18rem}
+.total-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:.32rem 1.6rem}
+.bd-item{font-size:.73rem;color:rgba(255,255,255,.42);display:flex;justify-content:space-between;gap:.7rem}
+.bd-item span{font-weight:500}
+.bd-tours{margin-top:.5rem;padding-top:.42rem;border-top:1px solid rgba(255,255,255,.07)}
+.bd-tours-title{font-size:.58rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.18);margin-bottom:.28rem}
+.bd-tour-line{font-size:.68rem;color:rgba(255,255,255,.36);display:flex;justify-content:space-between;gap:.7rem;padding:.08rem 0}
+.bd-tour-line span{font-weight:500}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.72}}
+.price-changed{animation:pulse .3s ease}
+
+/* DEST COLORS */
+#covenas{background:linear-gradient(180deg,var(--cov-bg) 0%,var(--deep) 100%)}
+.cov-accent{color:var(--cov-c)}
+.cov-tag{background:rgba(240,201,122,.12);color:var(--cov-c);border:1px solid rgba(240,201,122,.28)}
+.cov-bl{border-left:3px solid #D4A833}
+.cov-total{background:linear-gradient(135deg,#2a1d00 0%,#0e2a3a 100%);border:1px solid rgba(240,201,122,.2)}
+
+#santamarta{background:linear-gradient(180deg,var(--col-bg) 0%,var(--deep) 100%)}
+.col-accent{color:var(--col-c)}
+.col-tag{background:rgba(239,119,94,.12);color:var(--col-c);border:1px solid rgba(239,119,94,.28)}
+.col-bl{border-left:3px solid #EF7B5E}
+.col-total{background:linear-gradient(135deg,#3d1510 0%,#0e2a3a 100%);border:1px solid rgba(239,119,94,.2)}
+
+#curazao{background:linear-gradient(180deg,var(--cur-bg) 0%,var(--deep) 100%)}
+.cur-accent{color:var(--cur-c)}
+.cur-tag{background:rgba(66,165,245,.12);color:var(--cur-c);border:1px solid rgba(66,165,245,.28)}
+.cur-bl{border-left:3px solid #42A5F5}
+.cur-total{background:linear-gradient(135deg,#0d2540 0%,#0e2a3a 100%);border:1px solid rgba(66,165,245,.2)}
+
+#mexico{background:linear-gradient(180deg,var(--mex-bg) 0%,var(--deep) 100%)}
+.mex-accent{color:var(--mex-c)}
+.mex-tag{background:rgba(76,175,80,.12);color:var(--mex-c);border:1px solid rgba(76,175,80,.28)}
+.mex-bl{border-left:3px solid #4CAF50}
+.mex-total{background:linear-gradient(135deg,#1a3d22 0%,#0e2a3a 100%);border:1px solid rgba(76,175,80,.2)}
+
+/* COMPARISON */
+#comparacion{background:var(--deep);padding:5rem 1.5rem}
+.comp-header{text-align:center;max-width:620px;margin:0 auto 2.5rem}
+.comp-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.5rem}
+.comp-header p{font-size:.83rem;color:rgba(255,255,255,.33)}
+.comp-wrap{max-width:1100px;margin:0 auto;overflow-x:auto;padding:0 .5rem}
+table.ctbl{width:100%;border-collapse:collapse;font-size:.78rem;min-width:650px}
+.ctbl th{padding:.62rem .85rem;text-align:left;font-size:.58rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.24);border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
+.ctbl td{padding:.82rem .85rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.62)}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl tr:hover td{background:rgba(255,255,255,.02)}
+.dp{display:inline-flex;align-items:center;gap:.33rem;font-weight:500;color:#fff;font-size:.8rem}
+.pdot{width:7px;height:7px;border-radius:50%}
+.tc{font-weight:700;font-size:.86rem;color:#fff!important}
+.badge-xs{display:inline-block;font-size:.5rem;padding:.1rem .38rem;border-radius:100px;margin-left:.22rem;vertical-align:middle}
+.pros-grid{max-width:1100px;margin:2.2rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:.82rem;padding:0 .5rem}
+@media(max-width:800px){.pros-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.pros-grid{grid-template-columns:1fr}}
+.pros-card{background:rgba(255,255,255,.03);border-radius:12px;padding:1.1rem}
+.pros-title{font-size:.58rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.23);margin-bottom:.65rem}
+.pros-list{font-size:.76rem;color:rgba(255,255,255,.55);line-height:1.85}
+
+footer{text-align:center;padding:2.2rem 1.5rem;background:rgba(0,0,0,.18);border-top:1px solid rgba(255,255,255,.05)}
+footer p{font-size:.68rem;color:rgba(255,255,255,.15);margin-bottom:.18rem}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✈ Propuesta de viaje 2026</div>
+    <h1>Vacaciones<br>de <em>verano</em></h1>
+    <p class="hero-sub">2 parejas · Medellín · Mayo 22–27 · 5 noches</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">4</span><span class="lbl">Destinos</span></div>
+      <div class="hero-stat"><span class="num">5</span><span class="lbl">Noches</span></div>
+      <div class="hero-stat"><span class="num">4</span><span class="lbl">Personas</span></div>
+      <div class="hero-stat"><span class="num">Mayo</span><span class="lbl">2026</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Explorar</div>
+</section>
+
+<!-- NAV -->
+<nav class="dest-nav">
+  <ul>
+    <li><a href="#covenas" class="cov">🏖 Coveñas</a></li>
+    <li><a href="#santamarta" class="col">🇨🇴 Santa Marta</a></li>
+    <li><a href="#curazao" class="cur">🇨🇼 Curazao</a></li>
+    <li><a href="#mexico" class="mex">🇲🇽 México</a></li>
+    <li><a href="#comparacion" class="cmp">Comparar</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════
+  01 — COVEÑAS
+══════════════════════════════ -->
+<section id="covenas" class="dest-section">
+<div class="dest-inner">
+
+  <div class="dest-header reveal">
+    <div>
+      <span class="dest-tag cov-tag">Destino 01</span>
+      <h2 class="dest-title">Coveñas<br><span class="cov-accent">Caribe Cordobés</span></h2>
+      <p class="dest-subtitle">🇨🇴 Colombia · Córdoba · Sin visa · En pesos</p>
+      <p class="dest-desc">El Caribe colombiano más cercano y económico. Coveñas tiene playas tranquilas, aguas cálidas, ambiente familiar y acceso fácil desde el interior del país. Sin sargazo, vuelos cortos desde Montería y la opción más barata del grupo. Perfecto para desconectar sin complicaciones.</p>
+    </div>
+    <div class="quick-facts reveal rd1">
+      <div class="fact"><div class="fact-label">Clima mayo</div><div class="fact-value">☀ 30–34°C · Muy soleado</div></div>
+      <div class="fact"><div class="fact-label">Sargazo</div><div class="fact-value" style="color:#80d090">✅ Sin riesgo</div></div>
+      <div class="fact"><div class="fact-label">Ruta MDE</div><div class="fact-value">MDE → MTR → Coveñas</div></div>
+      <div class="fact"><div class="fact-label">Ruta PEI</div><div class="fact-value">PEI → MTR → Coveñas</div></div>
+    </div>
+  </div>
+
+  <div class="alert good reveal">✅ <strong>Sin sargazo · Más barato del grupo.</strong> Vuelos cortos a Montería y luego ~2h en bus o taxi hasta Coveñas. No requiere visa ni dólares. La opción ideal para presupuesto ajustado.</div>
+
+  <div class="reveal">
+    <p class="section-label">✈ VUELOS A MONTERÍA · VIE 22 MAYO</p>
+    <div class="flights-block">
+      <div class="flight-row">
+        <div class="flight-origin">MDE → MTR</div>
+        <div class="flight-arrow">── Avianca ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">Vuelo directo · ~1h · Aeropuerto Los Garzones</div>
+          <div class="flight-price cov-accent">COP 363.000 / persona</div>
+          <div class="flight-detail">ida y vuelta · 2 personas MDE = $726K COP</div>
+        </div>
+      </div>
+      <div class="flight-row">
+        <div class="flight-origin">PEI → MTR</div>
+        <div class="flight-arrow">── Avianca ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">1 escala · ~3h total · Aeropuerto Los Garzones</div>
+          <div class="flight-price cov-accent">COP 559.000 / persona</div>
+          <div class="flight-detail">ida y vuelta · 2 personas PEI = $1.12M COP</div>
+        </div>
+      </div>
+      <div class="flight-row">
+        <div class="flight-origin">MTR → Coveñas</div>
+        <div class="flight-arrow">── Bus / taxi ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">~2h en carretera · Autobús ~$15K o taxi ~$80K/viaje</div>
+          <div class="flight-price cov-accent">~$320K COP</div>
+          <div class="flight-detail">traslado grupal ida y vuelta × 4 personas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-row reveal rd1">
+    <div class="info-card cov-bl">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Alojamiento · 5 noches</div>
+      <div class="card-main cov-accent">$0</div>
+      <div class="card-detail">Alojamiento propio o con familia<br>Sin costo de hospedaje<br>Añade tours y comida al total</div>
+    </div>
+    <div class="info-card cov-bl">
+      <div class="card-icon">🍽</div>
+      <div class="card-title">Comida estimada · 5 días</div>
+      <div class="card-main cov-accent">$1.20M</div>
+      <div class="card-detail">~$15 USD/persona/día<br>Mariscos frescos · Restaurantes locales<br>Arroz con coco · Pargo frito · Jugos</div>
+    </div>
+    <div class="info-card cov-bl">
+      <div class="card-icon">🚌</div>
+      <div class="card-title">Transporte local</div>
+      <div class="card-main cov-accent">Incluido</div>
+      <div class="card-detail">Traslado MTR–Coveñas ya contado<br>Mototaxis locales: ~$5K por trayecto<br>Taxis: ~$15–20K por trayecto</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p class="section-label">🎯 TOURS Y ACTIVIDADES — CLIC PARA AÑADIR AL TOTAL</p>
+    <div class="tours-grid">
+
+      <div class="tour-card cov-tour selected" data-dest="cov" data-price="280000" onclick="toggleTour(this)">
+        <div class="tour-check">✓</div>
+        <div class="tour-header"><span class="tour-num">01</span><span class="tour-name">Tour Islas del Rosario <span class="star-pill">★ top</span></span></div>
+        <div class="tour-desc">Catamaran a las Islas del Rosario desde Coveñas · Snorkel · Acuario · Playa blanca · Almuerzo incluido · Día completo</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cov-accent">$280.000 COP</div><div class="tour-price-sub">×4 personas · ~$70K/pers</div></div>
+          <div class="tour-cta on">Añadido ✓</div>
+        </div>
+      </div>
+
+      <div class="tour-card cov-tour" data-dest="cov" data-price="200000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">02</span><span class="tour-name">Paseo en lancha + Pesca deportiva</span></div>
+        <div class="tour-desc">Recorrido por el Golfo de Morrosquillo · Pesca artesanal con lugareños · Mangle y fauna costera · 4h aprox.</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cov-accent">$200.000 COP</div><div class="tour-price-sub">×4 personas · ~$50K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card cov-tour" data-dest="cov" data-price="160000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">03</span><span class="tour-name">Deportes acuáticos en playa</span></div>
+        <div class="tour-desc">Kayak · Paddleboard · Banana boat · Jet ski · Todo disponible en la playa de Coveñas · Por hora o paquete</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cov-accent">$160.000 COP</div><div class="tour-price-sub">×4 personas · ~$40K/pers · paquete básico</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card cov-tour" data-dest="cov" data-price="240000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">04</span><span class="tour-name">Excursión a Santiago de Tolú</span></div>
+        <div class="tour-desc">Pueblo pesquero a 15 min · Malecón histórico · Gastronomía local · Mercado de mariscos · Atardecer en la bahía</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cov-accent">$240.000 COP</div><div class="tour-price-sub">×4 personas · ~$60K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="total-block cov-total reveal">
+    <div class="total-label">Total estimado · 4 personas · 5 noches</div>
+    <div class="total-row">
+      <div>
+        <div class="total-price-big cov-accent" id="cov-price">$0</div>
+        <div class="total-price-sub" id="cov-pp">calculando…</div>
+      </div>
+      <div>
+        <div class="total-breakdown">
+          <div class="bd-item">Vuelo MDE ×2 <span class="cov-accent">$726K</span></div>
+          <div class="bd-item">Vuelo PEI ×2 <span class="cov-accent">$1.12M</span></div>
+          <div class="bd-item">Traslados MTR↔Coveñas <span class="cov-accent">$320K</span></div>
+          <div class="bd-item">Alojamiento <span class="cov-accent">$0</span></div>
+          <div class="bd-item">Comida est. <span class="cov-accent">$1.20M</span></div>
+        </div>
+        <div class="bd-tours" id="cov-bd"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════
+  02 — SANTA MARTA
+══════════════════════════════ -->
+<section id="santamarta" class="dest-section">
+<div class="dest-inner">
+
+  <div class="dest-header reveal">
+    <div>
+      <span class="dest-tag col-tag">Destino 02</span>
+      <h2 class="dest-title">Santa Marta<br><span class="col-accent">Caribe Colombiano</span></h2>
+      <p class="dest-subtitle">🇨🇴 Colombia · Magdalena · Sin visa · En pesos</p>
+      <p class="dest-desc">El destino más completo del Caribe colombiano. La Sierra Nevada, playas vírgenes, Minca en las montañas y el Parque Tayrona lo hacen único. Dos viajeros desde Medellín y dos desde Pereira — sin dólares, sin visa, sin sargazo.</p>
+    </div>
+    <div class="quick-facts reveal rd1">
+      <div class="fact"><div class="fact-label">Clima mayo</div><div class="fact-value">🌤 28–32°C · Caluroso</div></div>
+      <div class="fact"><div class="fact-label">Sargazo</div><div class="fact-value" style="color:#80d090">✅ Sin riesgo</div></div>
+      <div class="fact"><div class="fact-label">Vuelo MDE</div><div class="fact-value">3h35 · 1 escala BOG</div></div>
+      <div class="fact"><div class="fact-label">Vuelo PEI</div><div class="fact-value">3h30 · 1 escala BOG</div></div>
+    </div>
+  </div>
+
+  <div class="alert good reveal">✅ <strong>Sin sargazo.</strong> El Caribe colombiano no está afectado. Sin visa ni dólares. Vuelos económicos desde ambas ciudades.</div>
+  <div class="alert warn reveal">⚠ <strong>Tayrona:</strong> Cierre programado del 1–15 junio. El viaje (22–27 mayo) debería estar abierto — verificar en <strong>parquesnacionales.gov.co</strong> días antes.</div>
+
+  <div class="reveal">
+    <p class="section-label">✈ VUELOS · VIE 22 MAYO — MIÉ 27 MAYO</p>
+    <div class="flights-block">
+      <div class="flight-row">
+        <div class="flight-origin">MDE → SMR</div>
+        <div class="flight-arrow">── Avianca Express ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">4:55 PM – 8:30 PM · 1 escala BOG · 3h35</div>
+          <div class="flight-price col-accent">COP 371.400 / persona</div>
+          <div class="flight-detail">i+v · 2 personas MDE = $742.800 COP</div>
+        </div>
+      </div>
+      <div class="flight-row">
+        <div class="flight-origin">PEI → SMR</div>
+        <div class="flight-arrow">── Avianca Express ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">5:00 PM – 8:30 PM · 1 escala BOG · 3h30</div>
+          <div class="flight-price col-accent">COP 542.160 / persona</div>
+          <div class="flight-detail">i+v · 2 personas PEI = $1.084.320 COP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-row reveal rd1">
+    <div class="info-card col-bl">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Alojamiento · 5 noches</div>
+      <div class="card-main col-accent">$1.50M</div>
+      <div class="card-detail">Airbnb Gaira · Superhost ★4.8<br>Reserva del Mar · Playa + Piscina + Jacuzzi<br>2 habitaciones · 4 camas · Cancelación gratis</div>
+    </div>
+    <div class="info-card col-bl">
+      <div class="card-icon">🍽</div>
+      <div class="card-title">Comida estimada · 5 días</div>
+      <div class="card-main col-accent">$1.60M</div>
+      <div class="card-detail">~$20 USD/persona/día<br>Pescado fresco · Patacones · Jugos<br>El más económico de los 3 destinos inter.</div>
+    </div>
+    <div class="info-card col-bl">
+      <div class="card-icon">🚌</div>
+      <div class="card-title">Transporte local</div>
+      <div class="card-main col-accent">Buses</div>
+      <div class="card-detail">Bus a Tayrona: ~$9K/pers<br>Bus a Palomino: ~$12K/pers<br>Taxi local: ~$15–30K por trayecto</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p class="section-label">🎯 TOURS Y ACTIVIDADES — CLIC PARA AÑADIR AL TOTAL</p>
+    <div class="tours-grid">
+
+      <div class="tour-card col-tour selected" data-dest="col" data-price="640000" onclick="toggleTour(this)">
+        <div class="tour-check">✓</div>
+        <div class="tour-header"><span class="tour-num">01</span><span class="tour-name">Parque Tayrona — Cabo San Juan <span class="star-pill">★ top</span></span></div>
+        <div class="tour-desc">Lancha desde Taganga directo a Cabo San Juan · 40 min · Playas vírgenes entre selva y montaña · Una de las mejores del mundo</div>
+        <div class="tour-footer">
+          <div><div class="tour-price col-accent">$640.000 COP</div><div class="tour-price-sub">×4 personas · ~$160K/pers</div></div>
+          <div class="tour-cta on">Añadido ✓</div>
+        </div>
+      </div>
+
+      <div class="tour-card col-tour" data-dest="col" data-price="400000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">02</span><span class="tour-name">Minca — café, cacao y cascadas</span></div>
+        <div class="tour-desc">Finca café orgánico + Cascadas Marinka · Hamacas con vista panorámica Sierra Nevada · 45 min desde SM</div>
+        <div class="tour-footer">
+          <div><div class="tour-price col-accent">$400.000 COP</div><div class="tour-price-sub">×4 personas · ~$100K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card col-tour" data-dest="col" data-price="240000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">03</span><span class="tour-name">Palomino — tubing en el río</span></div>
+        <div class="tour-desc">Tubing por el Río Palomino hasta desembocar en el Caribe · Hamacas · Ambiente tranquilo y local · 1h15 desde SM</div>
+        <div class="tour-footer">
+          <div><div class="tour-price col-accent">$240.000 COP</div><div class="tour-price-sub">×4 personas · ~$60K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card col-tour" data-dest="col" data-price="480000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">04</span><span class="tour-name">Velero a Playa Blanca + Taganga</span></div>
+        <div class="tour-desc">Playas solo accesibles por mar · Snorkel incluido · Tarde libre en Taganga · Salida desde el muelle de SM</div>
+        <div class="tour-footer">
+          <div><div class="tour-price col-accent">$480.000 COP</div><div class="tour-price-sub">×4 personas · ~$120K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="total-block col-total reveal">
+    <div class="total-label">Total estimado · 4 personas · 5 noches</div>
+    <div class="total-row">
+      <div>
+        <div class="total-price-big col-accent" id="col-price">$0</div>
+        <div class="total-price-sub" id="col-pp">calculando…</div>
+      </div>
+      <div>
+        <div class="total-breakdown">
+          <div class="bd-item">Vuelo MDE ×2 <span class="col-accent">$742K</span></div>
+          <div class="bd-item">Vuelo PEI ×2 <span class="col-accent">$1.08M</span></div>
+          <div class="bd-item">Alojamiento <span class="col-accent">$1.50M</span></div>
+          <div class="bd-item">Comida est. <span class="col-accent">$1.60M</span></div>
+        </div>
+        <div class="bd-tours" id="col-bd"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════
+  03 — CURAZAO
+══════════════════════════════ -->
+<section id="curazao" class="dest-section">
+<div class="dest-inner">
+
+  <div class="dest-header reveal">
+    <div>
+      <span class="dest-tag cur-tag">Destino 03</span>
+      <h2 class="dest-title">Curazao &<br><span class="cur-accent">Willemstad</span></h2>
+      <p class="dest-subtitle">🇨🇼 Caribe Holandés · ABC Islands · 2 MDE + 2 PEI</p>
+      <p class="dest-desc">Una isla diferente: arquitectura colonial holandesa Patrimonio UNESCO, buceo de clase mundial y Klein Curazao — una isla desierta con tortugas marinas. Menos turística que Aruba, más auténtica. Pocas personas lo conocen, todas lo recuerdan.</p>
+    </div>
+    <div class="quick-facts reveal rd1">
+      <div class="fact"><div class="fact-label">Clima mayo</div><div class="fact-value">☀ 29–32°C · Seco</div></div>
+      <div class="fact"><div class="fact-label">Sargazo</div><div class="fact-value" style="color:#80d090">✅ Riesgo bajo</div></div>
+      <div class="fact"><div class="fact-label">Vuelo MDE</div><div class="fact-value">4h21 · 1 escala PTY</div></div>
+      <div class="fact"><div class="fact-label">Vuelo PEI</div><div class="fact-value">7h40 · 1 escala BOG</div></div>
+    </div>
+  </div>
+
+  <div class="alert good reveal">✅ <strong>Sin sargazo.</strong> Las playas del lado oeste (Porto Mari, Cas Abao, Grote Knip) están prácticamente libres. Gran ventaja frente a México en 2026.</div>
+
+  <div class="reveal">
+    <p class="section-label">✈ VUELOS · VIE 22 MAYO — MIÉ 27 MAYO</p>
+    <div class="flights-block">
+      <div class="flight-row">
+        <div class="flight-origin">MDE → CUR</div>
+        <div class="flight-arrow">── Copa Airlines ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">9:15 AM – 2:36 PM · 1 escala PTY 46min</div>
+          <div class="flight-price cur-accent">COP 1.288.671 / persona</div>
+          <div class="flight-detail">i+v · 2 personas MDE = $2.577.342 COP</div>
+        </div>
+      </div>
+      <div class="flight-row">
+        <div class="flight-origin">PEI → CUR</div>
+        <div class="flight-arrow">── Avianca Express ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">8:20 AM – 5:00 PM · 1 escala BOG 4h45 · 7h40</div>
+          <div class="flight-price cur-accent">COP 1.387.190 / persona</div>
+          <div class="flight-detail">i+v · 2 personas PEI = $2.774.380 COP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-row reveal rd1">
+    <div class="info-card cur-bl">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Alojamiento · 5 noches</div>
+      <div class="card-main cur-accent">$1.90M</div>
+      <div class="card-detail">Airbnb Willemstad · Superhost ★4.82<br>2 hab · Piscina · Parqueo · Cancelación gratis<br>5 noches · 4 adultos</div>
+    </div>
+    <div class="info-card cur-bl">
+      <div class="card-icon">🚗</div>
+      <div class="card-title">Auto alquiler · 5 días</div>
+      <div class="card-main cur-accent">~$385K</div>
+      <div class="card-detail">~$100 USD · Aeropuerto Hato (CUR)<br>Necesario: playas del oeste 30+ min<br>Cas Abao · Grote Knip · Porto Mari</div>
+    </div>
+    <div class="info-card cur-bl">
+      <div class="card-icon">🍽</div>
+      <div class="card-title">Comida estimada · 5 días</div>
+      <div class="card-main cur-accent">$3.10M</div>
+      <div class="card-detail">~$40 USD/persona/día<br>Marché Bieuw (mercado local)<br>Stobá de cabra · Pescado fresco</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p class="section-label">🎯 TOURS Y ACTIVIDADES — CLIC PARA AÑADIR AL TOTAL</p>
+    <div class="tours-grid">
+
+      <div class="tour-card cur-tour selected" data-dest="cur" data-price="2100000" onclick="toggleTour(this)">
+        <div class="tour-check">✓</div>
+        <div class="tour-header"><span class="tour-num">01</span><span class="tour-name">Klein Curazao — isla desierta <span class="star-pill">★ top</span></span></div>
+        <div class="tour-desc">Catamaran día completo · Isla desierta · Tortugas marinas · Faro abandonado · Naufragios · BBQ + barra libre incluidos</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cur-accent">$2.100.000 COP</div><div class="tour-price-sub">×4 personas · ~$525K/pers · ~$140 USD</div></div>
+          <div class="tour-cta on">Añadido ✓</div>
+        </div>
+      </div>
+
+      <div class="tour-card cur-tour" data-dest="cur" data-price="580000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">02</span><span class="tour-name">Snorkel con tortugas — Playa Piskado</span></div>
+        <div class="tour-desc">Pescadores atraen tortugas a diario · Nadas directamente con ellas desde la orilla · Con guía o por libre · Imperdible</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cur-accent">$580.000 COP</div><div class="tour-price-sub">×4 personas · ~$145K/pers · tour guiado</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card cur-tour" data-dest="cur" data-price="320000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">03</span><span class="tour-name">Destilería Chobolobo — Blue Curaçao</span></div>
+        <div class="tour-desc">Tour mansión histórica + proceso con naranja Laraha local + taller de cócteles · Muy recomendado para grupos</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cur-accent">$320.000 COP</div><div class="tour-price-sub">×4 personas · ~$80K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card cur-tour" data-dest="cur" data-price="460000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">04</span><span class="tour-name">Buceo shore diving — Porto Mari</span></div>
+        <div class="tour-desc">Top 5 mundial para buceo · "Doble arrecife" desde la orilla sin necesidad de bote · Cursos disponibles para principiantes</div>
+        <div class="tour-footer">
+          <div><div class="tour-price cur-accent">$460.000 COP</div><div class="tour-price-sub">×4 personas · ~$115K/pers</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="total-block cur-total reveal">
+    <div class="total-label">Total estimado · 4 personas · 5 noches</div>
+    <div class="total-row">
+      <div>
+        <div class="total-price-big cur-accent" id="cur-price">$0</div>
+        <div class="total-price-sub" id="cur-pp">calculando…</div>
+      </div>
+      <div>
+        <div class="total-breakdown">
+          <div class="bd-item">Vuelo MDE ×2 <span class="cur-accent">$2.58M</span></div>
+          <div class="bd-item">Vuelo PEI ×2 <span class="cur-accent">$2.77M</span></div>
+          <div class="bd-item">Alojamiento <span class="cur-accent">$1.90M</span></div>
+          <div class="bd-item">Auto <span class="cur-accent">$385K</span></div>
+          <div class="bd-item">Comida est. <span class="cur-accent">$3.10M</span></div>
+        </div>
+        <div class="bd-tours" id="cur-bd"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════
+  04 — MÉXICO
+══════════════════════════════ -->
+<section id="mexico" class="dest-section">
+<div class="dest-inner">
+
+  <div class="dest-header reveal">
+    <div>
+      <span class="dest-tag mex-tag">Destino 04</span>
+      <h2 class="dest-title">Cancún &<br><span class="mex-accent">Playa del Carmen</span></h2>
+      <p class="dest-subtitle">🇲🇽 México · Riviera Maya · 2 MDE + 2 PEI</p>
+      <p class="dest-desc">La Riviera Maya combina playas caribeñas con cenotes únicos en el mundo, ruinas mayas y entretenimiento de primer nivel. Playa del Carmen tiene la Quinta Avenida, Cozumel y Xcaret. El riesgo de sargazo es alto en 2026 — pero los cenotes son 100% libres.</p>
+    </div>
+    <div class="quick-facts reveal rd1">
+      <div class="fact"><div class="fact-label">Clima mayo</div><div class="fact-value">🌤 30–33°C · Caluroso</div></div>
+      <div class="fact"><div class="fact-label">Sargazo</div><div class="fact-value" style="color:#f5a995">⚠ Riesgo ALTO</div></div>
+      <div class="fact"><div class="fact-label">Vuelo MDE</div><div class="fact-value">5h06 · Copa via PTY</div></div>
+      <div class="fact"><div class="fact-label">Vuelo PEI</div><div class="fact-value">5h34 · Copa via PTY</div></div>
+    </div>
+  </div>
+
+  <div class="alert danger reveal">⚠ <strong>Sargazo 2026 récord.</strong> La temporada 2026 se proyecta como la más intensa de la historia. Playa del Carmen es de alto riesgo. El condominio tiene piscina y los cenotes son el plan perfecto cuando haya sargazo.</div>
+
+  <div class="reveal">
+    <p class="section-label">✈ VUELOS · VIE 22 MAYO — MIÉ 27 MAYO</p>
+    <div class="flights-block">
+      <div class="flight-row">
+        <div class="flight-origin">MDE → CUN</div>
+        <div class="flight-arrow">── Copa Airlines ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">5:40 AM – 10:46 AM · 1 escala PTY 47min</div>
+          <div class="flight-price mex-accent">COP 1.454.240 / persona</div>
+          <div class="flight-detail">i+v · 2 personas MDE = $2.908.480 COP</div>
+        </div>
+      </div>
+      <div class="flight-row">
+        <div class="flight-origin">PEI → CUN</div>
+        <div class="flight-arrow">── Copa Airlines ──→</div>
+        <div class="flight-info">
+          <div class="flight-airline">5:12 AM – 10:46 AM · 1 escala PTY 1h17</div>
+          <div class="flight-price mex-accent">COP 1.889.040 / persona</div>
+          <div class="flight-detail">i+v · 2 personas PEI = $3.778.080 COP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-row reveal rd1">
+    <div class="info-card mex-bl">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Alojamiento · 5 noches</div>
+      <div class="card-main mex-accent">$1.48M</div>
+      <div class="card-detail">The Gallery Condos PDC ★★★★<br>Apto terraza · 70m² · Piscina · 450m playa<br>Calificación 8.9/10 · 4 adultos</div>
+    </div>
+    <div class="info-card mex-bl">
+      <div class="card-icon">🚗</div>
+      <div class="card-title">Auto alquiler · 5 días</div>
+      <div class="card-main mex-accent">$266K</div>
+      <div class="card-detail">Chevrolet Spark · $69 USD total<br>Aeropuerto Cancún (CUN)<br>Gasolina ~$50 USD/semana adicional</div>
+    </div>
+    <div class="info-card mex-bl">
+      <div class="card-icon">🍽</div>
+      <div class="card-title">Comida estimada · 5 días</div>
+      <div class="card-main mex-accent">$2.70M</div>
+      <div class="card-detail">~$35 USD/persona/día<br>Tacos callejeros · Cocina yucateca<br>Alejarse zona hotelera = precios bajos</div>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <p class="section-label">🎯 TOURS Y ACTIVIDADES — CLIC PARA AÑADIR AL TOTAL</p>
+    <div class="tours-grid">
+
+      <div class="tour-card mex-tour selected" data-dest="mex" data-price="2581248" onclick="toggleTour(this)">
+        <div class="tour-check">✓</div>
+        <div class="tour-header"><span class="tour-num">01</span><span class="tour-name">Xcaret Plus: Entrada + Buffet <span class="star-pill">★ elegido</span></span></div>
+        <div class="tour-desc">Parque maya · Ríos subterráneos · Arrecifes · Espectáculo "México Espectacular" nocturno · Área Plus + 5 restaurantes buffet</div>
+        <div class="tour-footer">
+          <div><div class="tour-price mex-accent">$2.581.248 COP</div><div class="tour-price-sub">×4 personas · $645.312/pers · 10% dcto</div></div>
+          <div class="tour-cta on">Añadido ✓</div>
+        </div>
+      </div>
+
+      <div class="tour-card mex-tour selected" data-dest="mex" data-price="601080" onclick="toggleTour(this)">
+        <div class="tour-check">✓</div>
+        <div class="tour-header"><span class="tour-num">02</span><span class="tour-name">Tour Behilha — Riviera Maya <span class="star-pill">★ elegido</span></span></div>
+        <div class="tour-desc">679 MXN/pers (~$39 USD · TRM $17.26) · Excursión naturaleza Riviera Maya · Transporte + guía incluidos · Día completo</div>
+        <div class="tour-footer">
+          <div><div class="tour-price mex-accent">$601.080 COP</div><div class="tour-price-sub">×4 personas · ~$150K/pers</div></div>
+          <div class="tour-cta on">Añadido ✓</div>
+        </div>
+      </div>
+
+      <div class="tour-card mex-tour" data-dest="mex" data-price="540000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">03</span><span class="tour-name">Excursión Cozumel — Snorkel</span></div>
+        <div class="tour-desc">Ferry desde PDC (~$20 USD) + snorkel Gran Arrecife Mesoamericano · 2do más grande del mundo · Día en la isla</div>
+        <div class="tour-footer">
+          <div><div class="tour-price mex-accent">$540.000 COP</div><div class="tour-price-sub">×4 personas · ~$135K/pers · ferry + snorkel</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+      <div class="tour-card mex-tour" data-dest="mex" data-price="1200000" onclick="toggleTour(this)">
+        <div class="tour-check"></div>
+        <div class="tour-header"><span class="tour-num">04</span><span class="tour-name">Chichén Itzá + Cenote + Buffet</span></div>
+        <div class="tour-desc">Pirámide de Kukulcán (Maravilla del Mundo) · Cenote Ik Kil · Almuerzo buffet yucateco · Tour 10h desde PDC</div>
+        <div class="tour-footer">
+          <div><div class="tour-price mex-accent">$1.200.000 COP</div><div class="tour-price-sub">×4 personas · ~$300K/pers · ~$80 USD</div></div>
+          <div class="tour-cta off">+ Añadir</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="total-block mex-total reveal">
+    <div class="total-label">Total estimado · 4 personas · 5 noches</div>
+    <div class="total-row">
+      <div>
+        <div class="total-price-big mex-accent" id="mex-price">$0</div>
+        <div class="total-price-sub" id="mex-pp">calculando…</div>
+      </div>
+      <div>
+        <div class="total-breakdown">
+          <div class="bd-item">Vuelo MDE ×2 <span class="mex-accent">$2.91M</span></div>
+          <div class="bd-item">Vuelo PEI ×2 <span class="mex-accent">$3.78M</span></div>
+          <div class="bd-item">Alojamiento <span class="mex-accent">$1.48M</span></div>
+          <div class="bd-item">Auto <span class="mex-accent">$266K</span></div>
+          <div class="bd-item">Comida est. <span class="mex-accent">$2.70M</span></div>
+        </div>
+        <div class="bd-tours" id="mex-bd"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════
+  COMPARACIÓN
+══════════════════════════════ -->
+<section id="comparacion">
+<div style="max-width:1100px;margin:0 auto;padding:0 1.5rem">
+
+  <div class="comp-header reveal">
+    <span class="dest-tag" style="background:rgba(200,151,58,.12);color:var(--gold);border:1px solid rgba(200,151,58,.26)">Resumen</span>
+    <h2>Comparación <em style="font-style:italic;color:var(--gold)">final</em></h2>
+    <p>Los totales se actualizan automáticamente según los tours que selecciones arriba</p>
+  </div>
+
+  <div class="comp-wrap reveal">
+    <table class="ctbl">
+      <thead>
+        <tr>
+          <th>Destino</th>
+          <th>Vuelos ×4</th>
+          <th>Aloj.</th>
+          <th>Comida</th>
+          <th>Extra</th>
+          <th>Tours sel.</th>
+          <th>Total grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="dp"><span class="pdot" style="background:var(--cov-c)"></span>🏖 Coveñas</span></td>
+          <td>$1.85M</td><td>$0</td><td>$1.20M</td>
+          <td style="font-size:.7rem;color:rgba(255,255,255,.4)">+traslados $320K</td>
+          <td id="cmp-cov-t" style="color:var(--cov-c);font-weight:600">$0</td>
+          <td class="tc cov-accent" id="cmp-cov-total">$0 <span class="badge-xs" style="background:rgba(240,201,122,.12);color:var(--cov-c)">más barato</span></td>
+        </tr>
+        <tr>
+          <td><span class="dp"><span class="pdot" style="background:var(--col-c)"></span>🇨🇴 Santa Marta</span></td>
+          <td>$1.83M</td><td>$1.50M</td><td>$1.60M</td>
+          <td>—</td>
+          <td id="cmp-col-t" style="color:var(--col-c);font-weight:600">$0</td>
+          <td class="tc col-accent" id="cmp-col-total">$0 <span class="badge-xs" style="background:rgba(80,200,80,.1);color:#80d090">sin sargazo</span></td>
+        </tr>
+        <tr>
+          <td><span class="dp"><span class="pdot" style="background:var(--cur-c)"></span>🇨🇼 Curazao</span></td>
+          <td>$5.35M</td><td>$1.90M</td><td>$3.10M</td>
+          <td style="font-size:.7rem;color:rgba(255,255,255,.4)">+auto $385K</td>
+          <td id="cmp-cur-t" style="color:var(--cur-c);font-weight:600">$0</td>
+          <td class="tc cur-accent" id="cmp-cur-total">$0 <span class="badge-xs" style="background:rgba(66,165,245,.12);color:#90caf9">sin sargazo</span></td>
+        </tr>
+        <tr>
+          <td><span class="dp"><span class="pdot" style="background:var(--mex-c)"></span>🇲🇽 México</span></td>
+          <td>$6.69M</td><td>$1.48M</td><td>$2.70M</td>
+          <td style="font-size:.7rem;color:rgba(255,255,255,.4)">+auto $266K</td>
+          <td id="cmp-mex-t" style="color:var(--mex-c);font-weight:600">$0</td>
+          <td class="tc mex-accent" id="cmp-mex-total">$0 <span class="badge-xs" style="background:rgba(239,83,60,.1);color:#f5a995">⚠ sargazo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="pros-grid reveal">
+    <div class="pros-card" style="border:1px solid rgba(240,201,122,.15)">
+      <div class="pros-title">🏖 Coveñas · Mejor para…</div>
+      <div class="pros-list">✓ Presupuesto mínimo<br>✓ Sin visa ni dólares<br>✓ Alojamiento propio = $0<br>✓ Sin sargazo<br>✗ Menos actividades<br>✗ Destino más local</div>
+    </div>
+    <div class="pros-card" style="border:1px solid rgba(239,119,94,.15)">
+      <div class="pros-title">🇨🇴 Santa Marta · Mejor para…</div>
+      <div class="pros-list">✓ Naturaleza auténtica<br>✓ Sin visa ni dólares<br>✓ Tayrona + Minca<br>✓ Sin sargazo<br>✗ Tayrona: verificar<br>✗ Vuelo PEI más largo</div>
+    </div>
+    <div class="pros-card" style="border:1px solid rgba(66,165,245,.15)">
+      <div class="pros-title">🇨🇼 Curazao · Mejor para…</div>
+      <div class="pros-list">✓ Playas sin sargazo<br>✓ Buceo top 5 mundial<br>✓ Klein Curazao única<br>✓ Cultura UNESCO<br>✗ Comida más cara<br>✗ PEI: vuelo largo (7h40)</div>
+    </div>
+    <div class="pros-card" style="border:1px solid rgba(76,175,80,.15)">
+      <div class="pros-title">🇲🇽 México · Mejor para…</div>
+      <div class="pros-list">✓ Cenotes únicos<br>✓ Xcaret + ruinas mayas<br>✓ Vida nocturna Quinta Av.<br>✓ Más actividades<br>✗ Sargazo 2026 récord<br>✗ El más caro</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<footer>
+  <p>Precios orientativos · TRM ~$3.850 COP/USD · MXN $17.26/USD · Mayo 22–27, 2026</p>
+  <p>Verificar precios y disponibilidad antes de reservar · Vuelos sujetos a cambios</p>
+</footer>
+
+<script>
+// ── BASES FIJAS POR DESTINO (COP) ──
+// cov: vuelo MDE×2 726K + vuelo PEI×2 1118K + traslados 320K + aloj 0 + comida 1200K
+const BASE = {
+  cov: 726000 + 1118000 + 320000 + 0 + 1200000,
+  // col: vuelo MDE×2 742800 + vuelo PEI×2 1084320 + aloj 1500000 + comida 1600000
+  col: 742800 + 1084320 + 1500000 + 1600000,
+  // cur: vuelo MDE×2 2577342 + vuelo PEI×2 2774380 + aloj 1900000 + auto 385000 + comida 3100000
+  cur: 2577342 + 2774380 + 1900000 + 385000 + 3100000,
+  // mex: vuelo MDE×2 2908480 + vuelo PEI×2 3778080 + aloj 1480000 + auto 266000 + comida 2700000
+  mex: 2908480 + 3778080 + 1480000 + 266000 + 2700000
+};
+
+function fmt(n){
+  if(n>=1e6){
+    const m=n/1e6;
+    const s=m%1===0?m.toFixed(0):m.toFixed(2).replace(/\.?0+$/,'');
+    return '$'+s+'M';
+  }
+  return '$'+Math.round(n/1000)+'K';
+}
+
+function getTours(dest){
+  let total=0,lines=[];
+  document.querySelectorAll(`.tour-card[data-dest="${dest}"].selected`).forEach(c=>{
+    const p=parseInt(c.dataset.price);
+    const name=c.querySelector('.tour-name').textContent.replace(/★.*/,'').trim().substring(0,36);
+    total+=p; lines.push({name,p});
+  });
+  return{total,lines};
+}
+
+function updateTotal(dest){
+  const{total:tTotal,lines}=getTours(dest);
+  const grand=BASE[dest]+tTotal;
+  const priceEl=document.getElementById(`${dest}-price`);
+  const ppEl=document.getElementById(`${dest}-pp`);
+  const bdEl=document.getElementById(`${dest}-bd`);
+  priceEl.classList.add('price-changed');
+  setTimeout(()=>priceEl.classList.remove('price-changed'),350);
+  priceEl.textContent=fmt(grand);
+  ppEl.textContent='≈ '+fmt(Math.round(grand/4))+' por persona';
+  bdEl.innerHTML=lines.length
+    ?`<div class="bd-tours-title">Tours seleccionados</div>`+lines.map(l=>`<div class="bd-tour-line">${l.name}<span>${fmt(l.p)}</span></div>`).join('')
+    :'';
+  const tCell=document.getElementById(`cmp-${dest}-t`);
+  tCell.textContent=tTotal?fmt(tTotal):'—';
+  const totCell=document.getElementById(`cmp-${dest}-total`);
+  const badge=totCell.querySelector('.badge-xs');
+  totCell.childNodes[0].textContent=fmt(grand)+' ';
+}
+
+function toggleTour(card){
+  const dest=card.dataset.dest;
+  const check=card.querySelector('.tour-check');
+  const cta=card.querySelector('.tour-cta');
+  const sel=card.classList.contains('selected');
+  card.classList.toggle('selected');
+  if(sel){check.textContent='';if(cta){cta.className='tour-cta off';cta.textContent='+ Añadir';}}
+  else{check.textContent='✓';if(cta){cta.className='tour-cta on';cta.textContent='Añadido ✓';}}
+  updateTotal(dest);
+}
+
+window.addEventListener('DOMContentLoaded',()=>['cov','col','cur','mex'].forEach(updateTotal));
+
+// Reveal
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+// Nav highlight
+const secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  document.querySelectorAll('.dest-nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+},{passive:true});
+</script>
+</body>
+</html>
